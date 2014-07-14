@@ -1,0 +1,6 @@
+[submodule "benchmarks/lib/mathjs"]
+	path = benchmarks/lib/mathjs
+	url = https://github.com/josdejong/mathjs.git
+[submodule "benchmarks/lib/benchmarkjs"]
+	path = benchmarks/lib/benchmarkjs
+	url = https://github.com/bestiejs/benchmark.js.git
