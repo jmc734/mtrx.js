@@ -1,133 +1,124 @@
+requirejs.config({
 
-Benchmarks = {
-
-    Transpose: function(){
-        var suite = new Benchmark.Suite('Transpose');
+    baseUrl: 'benchmarks',
+    
+    deps: [
         
-        var array = [
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9]
-        ];
+        'chart'
         
-        var a = new Matrix(array);
-        var b = math.matrix(array);
+    ],
+    
+    paths: {
+    
+        'benchmark': '../lib/benchmark/benchmark',
         
-        suite.add('MorphJS', function(){
-            Matrix.transpose(a);
-        }).add('MathJS', function(){
-            math.transpose(b);
-        }); 
+        'mtrx': '../src/mtrx',
         
-        return suite;
+        'mathjs': '../lib/mathjs/dist/math.min',
+    
+        'chart': '../lib/chart/Chart.min'
+    
     },
     
-    MultiplyScalar: function(){
-        var suite = new Benchmark.Suite('MultiplyScalar');
+    shim: {
         
-        var array = [
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9]
-        ];
+        'benchmark': {
+            exports: 'Benchmark'
+        },
         
-        var a1 = new Matrix(array);
-        var b1 = math.matrix(array);
+        'mathjs': {
+            exports: 'math'
+        },
         
-        suite.add('MorphJS', function(){
-            Matrix.multiplyScalar(a1,10);
-        }).add('MathJS', function(){
-            math.multiply(b1,10);
-        });
+        'chart': {
+            exports: 'Chart'
+        }
         
-        return suite;
-    },
-    
-    Multiply: function(){
-        var suite = new Benchmark.Suite('Multiply');
-        
-        var array1 = [
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9]
-        ];
-        var array2 = [
-            [1,2,3,4],
-            [5,6,7,8],
-            [1,2,3,4],
-            [5,6,7,8],
-            [1,2,3,4],
-            [5,6,7,8],
-            [1,2,3,4],
-            [5,6,7,8],
-            [1,2,3,4],
-            [5,6,7,8]
-        ];
-        
-        var a1 = new Matrix(array1);
-        var a2 = new Matrix(array2);
-        var b1 = math.matrix(array1);
-        var b2 = math.matrix(array2);
-        
-        suite.add('MorphJS', function(){
-            Matrix.multiply(a1,a2);
-        }).add('MathJS', function(){
-            math.multiply(b1,b2);
-        });
-        
-        return suite;
-    },
-    
-    Add: function(){
-        var suite = new Benchmark.Suite('Add');
-        
-        var array = [
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9]
-        ];
-        
-        var a1 = new Matrix(array);
-        var b1 = math.matrix(array);
-        
-        suite.add('MorphJS', function(){
-            Matrix.add(a1,a1);
-        }).add('MathJS', function(){
-            math.add(b1,b1);
-        });
-        
-        return suite;
-    },
-
-    Clone: function(){
-        var suite = new Benchmark.Suite('Clone');
-        
-        var array = [
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9],
-            [9,8,7,6,5,4,3,2,1,0],
-            [0,1,2,3,4,5,6,7,8,9]
-        ];
-        
-        var a1 = new Matrix(array);
-        var b1 = math.matrix(array);
-        
-        suite.add('MorphJS', function(){
-            Matrix.clone(a1);
-        }).add('MathJS', function(){
-            math.clone(b1);
-        });
-        
-        return suite;
     }
+
+});
+
+require([
+    'transpose',
+    'multiply',
+    'clone'
+], function(){
     
-};
+    var chart = require('chart');
+    var ctx = document.getElementById('chart').getContext('2d');
+    
+    var suites = Array.prototype.slice.call(arguments);
+    
+    
+    
+    var chartConfig = {
+		labels: [],
+		datasets: [
+			{
+				label: 'mtrx',
+				fillColor: 'rgba(220,220,220,0.2)',
+				strokeColor: 'rgba(220,220,220,1)',
+				pointColor: 'rgba(220,220,220,1)',
+				pointStrokeColor: '#fff',
+				pointHighlightFill: '#fff',
+				pointHighlightStroke: 'rgba(220,220,220,1)',
+				data: []
+			},
+			{
+				label: 'mathjs',
+				fillColor: 'rgba(151,187,205,0.2)',
+				strokeColor: 'rgba(151,187,205,1)',
+				pointColor: 'rgba(151,187,205,1)',
+				pointStrokeColor: '#fff',
+				pointHighlightFill: '#fff',
+				pointHighlightStroke: 'rgba(151,187,205,1)',
+				data: []
+			}
+		]
+	};
+    
+    suites.forEach(function(suite){
+        chartConfig.labels.push(suite.name);
+        
+        chartConfig.datasets.forEach(function(dataset){
+           dataset.data.push(0); 
+        });
+    });
+    
+    var results = new chart(ctx).Radar(chartConfig, {
+        responsive: true
+    });
+        
+    var i = 0;
+    var update = function(){
+        var benchmarks = Array.prototype.slice.call(this);
+        
+        benchmarks.forEach(function(benchmark, j){
+            results.datasets[j].points[i].value = benchmark.stats.mean*1000000;
+        });
+        
+        results.update();
+    };
+    var run = function(){
+    
+        if(!suites.length) return;
+    
+        var suite = suites.shift();
+    
+        suite.on('start', function(){
+            console.log('start');
+        }).on('cycle', update).on('complete', function(){
+        
+            update.call(this);
+            
+            i++;
+            run();
+        }).run({
+            async: true
+        });
+    
+    };
+    
+    run();
+    
+});
