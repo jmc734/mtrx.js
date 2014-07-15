@@ -4,3 +4,18 @@
 [submodule "benchmarks/lib/benchmarkjs"]
 	path = benchmarks/lib/benchmarkjs
 	url = https://github.com/bestiejs/benchmark.js.git
+[submodule "lib/require"]
+	path = lib/require
+	url = https://github.com/jrburke/requirejs.git
+[submodule "lib/qunit"]
+	path = lib/qunit
+	url = https://github.com/jquery/qunit.git
+[submodule "lib/benchmark"]
+	path = lib/benchmark
+	url = https://github.com/bestiejs/benchmark.js.git
+[submodule "lib/mathjs"]
+	path = lib/mathjs
+	url = https://github.com/josdejong/mathjs.git
+[submodule "lib/chart"]
+	path = lib/chart
+	url = https://github.com/nnnick/Chart.js.git
