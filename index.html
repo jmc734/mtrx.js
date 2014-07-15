@@ -1,10 +1,28 @@
 <!doctype html5>
 <html>
     <head>
-        <title>JacobiJS - JavaScript Matrix Library</title>
+        <title>mtrx.js - JavaScript Matrix Library</title>
     </head>
     <body>
-    
-        <script type="text/javascript" src="lib/Matrix.js"></script>
+        <script type="text/javascript" src="lib/require/require.js"></script>
+        <script type="text/javascript">
+        
+            requirejs.config({
+            
+                baseUrl: 'src',
+                
+                paths: {
+                
+                    lib: '/lib'
+                    
+                }
+                
+            });
+            
+            require(['mtrx'], function(mtrx){
+                
+            });
+            
+        </script>
     </body>
 </html>
