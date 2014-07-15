@@ -1,0 +1,31 @@
+<!doctype html5>
+<html>
+
+    <head>
+        
+        <title>JacobiJS - Benchmarks</title>
+        
+    </head>
+    
+    <body>
+    
+        <script type="text/javascript" src="lib/Matrix.js"></script>
+        <script type="text/javascript" src="benchmarks/lib/mathjs/dist/math.js"></script>
+        <script type="text/javascript" src="benchmarks/lib/benchmark/benchmark.js"></script>
+        <script type="text/javascript" src="benchmarks/Benchmarks.js"></script>
+        <script type="text/javascript">
+            
+            var suite = new Benchmarks.Clone;
+            
+            suite.on('complete', function(){
+                this.forEach(function(bm){
+                    console.log(bm.stats);
+                });
+            }).run({
+                'async': true
+            });
+        </script>
+    
+    </body>
+
+</html>
