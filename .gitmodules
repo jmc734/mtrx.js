@@ -19,3 +19,6 @@
 [submodule "lib/chart"]
 	path = lib/chart
 	url = https://github.com/nnnick/Chart.js.git
+[submodule "lib/jquery"]
+	path = lib/jquery
+	url = https://github.com/jquery/jquery.git
