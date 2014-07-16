@@ -5,12 +5,116 @@
         
         <title>mtrx.js - Benchmarks</title>
         
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: Helvetica, arial, sans-serif;
+                font-size: 12px;
+            }
+            
+            html {
+                background: #EEE;
+            }
+            
+            #wrapper {
+                width: 1024px; 
+                display: block; 
+                margin: 100px auto;
+                background: rgba(0,0,0,0.8);
+                padding: 20px;
+                overflow:hidden
+            }
+            
+            #chart {
+                float: left;
+                width: 512px;
+            }
+            
+            #results {
+                float: right;
+                width: 512px;
+            }
+            
+            #results a {
+                color: #000;
+                text-decoration: none;
+            }
+            
+            #results a:hover {
+                text-decoration: underline;
+            }
+            
+            #results table {
+                float:right;
+            }
+            
+            #results th, #results td {
+                width: 80px;
+                padding: 10px 20px;
+                text-align: left;
+                margin-right: 20px;
+            }
+            
+            #results td:nth-child(1) {
+                background: rgba(230,230,230,0.9);
+            }
+            
+            #results th:nth-child(2) {
+                background: rgba(115,166,191,1);
+            }
+            
+            #results td:nth-child(2) {
+                background: rgba(151,187,205,0.75);
+            }
+            
+            #results th:nth-child(3) {
+                background: rgba(227,100,75,1);
+            }
+            
+            #results td:nth-child(3) {
+                background: rgba(227,100,75,0.75);
+            }
+            
+            #results th:nth-child(4) {
+                background: rgba(214, 214, 62, 1);
+            }
+            
+            #results td:nth-child(4) {
+                background: rgba(237, 237, 62, 0.75);
+            }
+            
+            #results td {
+                border-bottom: 4px solid rgba(0,0,0,0.05);
+            }
+            
+            #results tr:last-child td {
+                border-bottom: none;
+            }
+            
+        </style>
+        
     </head>
     
     <body>
     
-        <div style="width: 500px; display: block; margin: 100px auto;">
-            <canvas id="chart" width="500" height="500"></canvas>
+        <div id="wrapper">
+        
+            <div id="chart">
+                <canvas width="512" height="512"></canvas>
+            </div>
+            
+            <div id="results">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th></th>
+                        <th>mtrx</th>
+                        <th><a href="https://github.com/josdejong/mathjs">MathJS</a></th>
+                        <th><a href="https://github.com/jcoglan/sylvester">Sylvester</a></th>
+                    </tr>
+                </table>
+            </div>
+        
         </div>
     
         <script type="text/javascript" data-main="benchmarks/benchmarks.js" src="lib/require/require.js"></script>

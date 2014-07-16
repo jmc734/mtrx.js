@@ -1,10 +1,10 @@
-define('clone', [
+define('multiplyScalar', [
     'benchmark', 
     'mtrx', 
     'mathjs'
 ], function(benchmark, mtrx, mathjs){
 
-    var suite = new benchmark.Suite('Clone');
+    var suite = new benchmark.Suite('MultiplyScalar');
         
     var array = [
         [0,1,2,3,4,5,6,7,8,9],
@@ -18,9 +18,9 @@ define('clone', [
     var b1 = mathjs.matrix(array);
     
     suite.add('mtrx', function(){
-        mtrx.clone(a1);
+        mtrx.multiplyScalar(a1,10);
     }).add('mathjs', function(){
-        mathjs.clone(b1);
+        mathjs.multiply(b1,10);
     });
     
     return suite;
